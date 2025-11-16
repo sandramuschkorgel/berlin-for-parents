@@ -6,3 +6,5 @@ node_modules/
 dist/
 *.env
 data/datasets/
+__pycache__/
+*.pyc
