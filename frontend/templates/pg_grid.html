@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}LIST{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div class="pg-grid">
+        {% for pg in playgrounds %}
+        <article class="pg-card">
+            <div class="pg-content">
+                <h2 class="pg-title">{{ pg.id }}</h2>
+                <p>{{ pg.lat }}</p>
+                <p>{{ pg.lon }}</p>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

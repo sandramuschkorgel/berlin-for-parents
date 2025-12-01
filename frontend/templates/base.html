@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ name }}{% endblock %}</title>
+    {% block extra_head %}{% endblock %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+    <!-- Leaflet CSS -->
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+    />
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#">{{ name }}</a>
+            </div>
+            <div class="nav-menu">
+                <a href="{{ url_for('index') }}" class="nav-link">MAP</a>
+                <a href="{{ url_for('playgrounds_list') }}" class="nav-link">LIST</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        {% block content %}{% endblock %}
+
+        <!-- Leaflet JS -->
+        <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer">
+        </script>
+
+        {% block scripts %}{% endblock %}
+    </main>
+
+    <footer>
+        <div>&copy; {{ year }} {{ name }}. All rights reserved.</div>
+    </footer>
+</body>
+</html>
