@@ -27,6 +27,9 @@ footer {
     width: 100%;
     z-index: 1000;
     padding: 1rem 0;
+    height: 65px;
+    display: flex;
+    align-items: center;
 }
 
 .nav-container {
@@ -36,6 +39,7 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%; 
 }
 
 .nav-menu {
@@ -49,11 +53,18 @@ footer {
     font-size: 0.875rem;
     letter-spacing: 0.05em;
     transition: color 0.3s ease;
+    color: #4a5568; 
+}
+
+.nav-link:hover {
+    color: #2d3748;
 }
 
 /* Main content */
 .main-content {
     min-height: calc(100vh - 80px);
+    padding: 0;
+    margin: 0; 
 }
 
 /* Page containers */
@@ -72,6 +83,7 @@ footer {
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+    padding-top: 20px;
 }
 
 .pg-card {
@@ -100,9 +112,87 @@ footer {
     text-transform: capitalize;
 }
 
+/* Playground Map */
 #map {
+    position: fixed;
+    top: 65px;
+    left: 0;
+    right: 0;
+    bottom: 0;
     width: 100%;
-    height: calc(100vh - 80px); /* viewport minus navbar */
-    margin-top: 80px;           /* push below navbar */
+    height: calc(100vh - 65px);
     text-transform: capitalize;
+}
+
+.custom-marker-icon {
+    background: none;
+    border: none;
+}
+
+.simple-marker {
+    width: 16px;
+    height: 16px;
+    background-color: rgba(74, 85, 104, 0.85); 
+    border: 1px solid white;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.simple-marker:hover {
+    transform: scale(1.15);
+    transition: transform 0.2s ease;
+    background-color: rgba(74, 85, 104, 1);
+}
+
+.toggle-switch {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 24px;
+    transition: 0.3s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+    background-color: rgba(74, 85, 104, 0.85); 
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+    transform: translateX(20px);
+}
+
+.toggle-switch:hover .toggle-slider {
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
 }

@@ -1,10 +1,11 @@
-// frontend/static/scripts/map.js
+let playgroundMarkersLayer;
+let map;
 
 document.addEventListener("DOMContentLoaded", function () {
     // Initialize map centered on Berlin
     const berlinCoords = [52.52, 13.405]; // lat, lon
 
-    const map = L.map("map").setView(berlinCoords, 12);
+    map = L.map("map").setView(berlinCoords, 12);
 
     // Add OpenStreetMap tile layer
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -16,8 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
         tileSize: 256,
     }).addTo(map);
 
-    // Optional marker to show Berlin center
-    L.marker(berlinCoords).addTo(map).bindPopup("Berlin City Center");
+    // Initialize layer group
+    playgroundMarkersLayer = L.layerGroup().addTo(map);
 
     // 🚀 Fetch playgrounds from backend
     fetch("/api/playgrounds")
@@ -25,11 +26,30 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(playgrounds => {
 
             playgrounds.forEach(pg => {
-                L.marker([pg.lat, pg.lon])
-                    .addTo(map)
+                const modernIcon = L.divIcon({
+                    html: '<div class="simple-marker"></div>',
+                    iconSize: [16, 16],
+                    iconAnchor: [8, 8],
+                    popupAnchor: [0, -8],
+                    className: 'custom-marker-icon'
+                });
+
+                L.marker([pg.lat, pg.lon], { icon: modernIcon })
+                    .addTo(playgroundMarkersLayer)
                     .bindPopup(`${pg.name}`);
             });
 
         })
         .catch(err => console.error("Failed to load playgrounds", err));
+    
+    // Toggle function
+    window.togglePlaygroundMarkers = function() {
+        const checkbox = document.getElementById('playgroundToggle');
+        
+        if (checkbox.checked) {
+            map.addLayer(playgroundMarkersLayer);
+        } else {
+            map.removeLayer(playgroundMarkersLayer);
+        }
+    };
 });
