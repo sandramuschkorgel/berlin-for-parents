@@ -97,9 +97,12 @@ footer {
     font-size: 1.25rem;
     color: #1f2937;
     margin-bottom: 0.75rem;
+    text-transform: capitalize;
 }
 
 #map {
     width: 100%;
-    height: 100vh; /* fullscreen */
+    height: calc(100vh - 80px); /* viewport minus navbar */
+    margin-top: 80px;           /* push below navbar */
+    text-transform: capitalize;
 }

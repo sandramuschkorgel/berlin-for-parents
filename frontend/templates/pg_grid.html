@@ -8,9 +8,10 @@
         {% for pg in playgrounds %}
         <article class="pg-card">
             <div class="pg-content">
-                <h2 class="pg-title">{{ pg.id }}</h2>
-                <p>{{ pg.lat }}</p>
-                <p>{{ pg.lon }}</p>
+                <h2 class="pg-title">{{ pg.name }}</h2>
+                <p>ID: {{ pg.id }}</p>
+                <p>Latitude: {{ pg.lat }}</p>
+                <p>Longitude: {{ pg.lon }}</p>
             </div>
         </article>
         {% endfor %}

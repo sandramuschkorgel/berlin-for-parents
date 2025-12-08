@@ -34,6 +34,7 @@ def get_playgrounds():
 
             result.append({
                 "id": pg.osm_id,
+                "name": pg.name,
                 "lat": float(lat),
                 "lon": float(lon)
             })

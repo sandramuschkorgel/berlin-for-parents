@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
             playgrounds.forEach(pg => {
                 L.marker([pg.lat, pg.lon])
                     .addTo(map)
-                    .bindPopup(`Playground ID: ${pg.id}`);
+                    .bindPopup(`${pg.name}`);
             });
 
         })
