@@ -14,6 +14,8 @@ ENV = os.getenv("FLASK_ENV", "development")
 if ENV == "production":
     CORS_ORIGINS = [
         "https://sandramuschkorgel.github.io", 
+        "http://localhost:8000",
+        "http://127.0.0.1:8000"
     ]
 else:
     CORS_ORIGINS = [
