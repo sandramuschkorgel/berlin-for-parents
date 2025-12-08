@@ -1,13 +1,12 @@
-from flask import Blueprint, jsonify
-from models import Playground
-from sqlalchemy import text
-from sqlalchemy import create_engine
+from flask import Blueprint, jsonify, current_app
+from sqlalchemy import text, create_engine
 from sqlalchemy.orm import sessionmaker
-from config import DATABASE_URL
+from ..models import Playground
+from ..config import DATABASE_URL
 
 bp = Blueprint('playgrounds', __name__, url_prefix='/api')
 
-# Setup session for each request
+# Setup session
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(bind=engine)
 
@@ -29,16 +28,16 @@ def get_playgrounds():
                 _, coords = point.split('(')
                 coords = coords.strip(')')
                 lon, lat = coords.split()
-            else:
-                lon, lat = None, None
+                
+                result.append({
+                    "id": pg.osm_id,
+                    "name": pg.name,
+                    "lat": float(lat),
+                    "lon": float(lon)
+                })
 
-            result.append({
-                "id": pg.osm_id,
-                "name": pg.name,
-                "lat": float(lat),
-                "lon": float(lon)
-            })
-
-        return jsonify(result)
+        return jsonify(result), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
     finally:
         session.close()

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" id="nav-logo-text">Loading...</a>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">MAP</a>
+                <a href="list.html" class="nav-link">LIST</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="page-container">
+            <div id="loading">Loading playgrounds...</div>
+            <div id="error" style="display: none; color: red; padding: 20px;"></div>
+            <div class="pg-grid" id="playgrounds-grid">
+                <!-- Playgrounds will be inserted here -->
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div id="footer-text">Loading...</div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/base.js"></script>
+    <script>
+        const pageTitle = 'LIST';
+    </script>
+    <script src="js/list.js"></script>
+</body>
+</html>

@@ -20,10 +20,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // Initialize layer group
     playgroundMarkersLayer = L.layerGroup().addTo(map);
 
-    // 🚀 Fetch playgrounds from backend
-    fetch("/api/playgrounds")
-        .then(res => res.json())
+    // Fetch playgrounds using shared API function
+    fetchFromAPI('/api/playgrounds')
         .then(playgrounds => {
+            console.log(`Loaded ${playgrounds.length} playgrounds`);
 
             playgrounds.forEach(pg => {
                 const modernIcon = L.divIcon({
@@ -36,11 +36,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 L.marker([pg.lat, pg.lon], { icon: modernIcon })
                     .addTo(playgroundMarkersLayer)
-                    .bindPopup(`${pg.name}`);
+                    .bindPopup(`${pg.name || 'Unnamed Playground'}`);
             });
-
         })
-        .catch(err => console.error("Failed to load playgrounds", err));
+        .catch(err => {
+            alert("Failed to load playgrounds. Make sure the backend is running at " + CONFIG.API_BASE_URL);
+        });
     
     // Toggle function
     window.togglePlaygroundMarkers = function() {

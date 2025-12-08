@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <link rel="stylesheet" href="css/main.css">
+    
+    <!-- Leaflet CSS -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    />
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" id="nav-logo-text">Loading...</a>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">MAP</a>
+                <a href="list.html" class="nav-link">LIST</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div id="map">
+            <div class="map-toggle-container">
+                <label class="toggle-switch">
+                    <input type="checkbox" id="playgroundToggle" checked onclick="togglePlaygroundMarkers()">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div id="footer-text">Loading...</div>
+    </footer>
+
+    <!-- Leaflet JS -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer">
+    </script>
+    
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/base.js"></script>
+    <script>
+        const pageTitle = 'MAP';
+    </script>
+    <script src="js/map.js"></script>
+</body>
+</html>
