@@ -20,7 +20,9 @@ footer {
 /* Navigation */
 .navbar {
     background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px
+
+);
     border-bottom: 1px solid #e5e7eb;
     position: fixed;
     top: 0;
@@ -42,6 +44,15 @@ footer {
     width: 100%; 
 }
 
+#nav-logo-text {
+    text-decoration: none;
+    font-weight: 530;
+    font-size: 0.975rem;
+    letter-spacing: 0.05em;
+    transition: color 0.3s ease;
+    color: #4a5568; 
+}
+
 .nav-menu {
     display: flex;
     gap: 2rem;
@@ -49,15 +60,15 @@ footer {
 
 .nav-link {
     text-decoration: none;
-    font-weight: 500;
-    font-size: 0.875rem;
+    font-weight: 530;
+    font-size: 0.975rem;
     letter-spacing: 0.05em;
     transition: color 0.3s ease;
     color: #4a5568; 
 }
 
 .nav-link:hover {
-    color: #2d3748;
+    color: lightgray;
 }
 
 /* Main content */
@@ -74,7 +85,7 @@ footer {
     padding: 2rem;
 }
 
-/* Essays grid */
+/* Playground grid */
 .pg-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -97,6 +108,8 @@ footer {
 
 .pg-card:hover {
     transform: translateY(-4px);
+
+
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
@@ -112,23 +125,16 @@ footer {
     text-transform: capitalize;
 }
 
-/* Playground Map */
+/* Map Container */
 #map {
-    position: fixed;
-    top: 65px;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    position: relative;
     width: 100%;
     height: calc(100vh - 65px);
+    margin-top: 65px;
     text-transform: capitalize;
 }
 
-.custom-marker-icon {
-    background: none;
-    border: none;
-}
-
+/* Custom Marker Icon */
 .simple-marker {
     width: 16px;
     height: 16px;
@@ -138,42 +144,111 @@ footer {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.simple-marker:hover {
-    transform: scale(1.15);
-    transition: transform 0.2s ease;
-    background-color: rgba(74, 85, 104, 1);
+/* Filter Panel */
+.filter-panel {
+    position: absolute;
+    top: 0;
+    right: -320px;
+    width: 320px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(8px);
+    box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+    z-index: 999;
+    transition: right 0.3s ease;
 }
 
-.toggle-switch {
+.filter-panel.open {
+    right: 0;
+}
+
+/* Toggle Arrow Button */
+.toggle-panel-button {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 1000;
+    left: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+    border: none;
+    border-radius: 8px 0 0 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: -2px 0 6px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    z-index: 1001;
+}
+
+.toggle-panel-button:hover {
+    background: rgba(240, 240, 240, 0.95);
+}
+
+.toggle-panel-button svg {
+    width: 20px;
+    height: 20px;
+    color: rgba(74, 85, 104, 0.85);
+    transition: transform 0.3s ease;
+    transform: rotate(180deg);
+}
+
+.filter-panel.open .toggle-panel-button svg {
+    transform: rotate(0deg);
+}
+
+/* Filter Content */
+.filter-content {
+    padding: 20px;
+}
+
+.filter-section {
+    margin-bottom: 30px;
+}
+
+/* Filter header with toggle/dropdown */
+.filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filter-header h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Toggle Switch for Barrier */
+.filter-toggle-switch {
+    position: relative;
     display: inline-block;
     width: 44px;
     height: 24px;
-    cursor: pointer;
 }
 
-.toggle-switch input {
+.filter-toggle-switch input[type="checkbox"] {
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-.toggle-slider {
+.toggle-slider-filter {
     position: absolute;
+    cursor: pointer;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background-color: #ccc;
-    border-radius: 24px;
     transition: 0.3s;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    border-radius: 24px;
 }
 
-.toggle-slider:before {
+.toggle-slider-filter:before {
     position: absolute;
     content: "";
     height: 18px;
@@ -181,18 +256,54 @@ footer {
     left: 3px;
     bottom: 3px;
     background-color: white;
-    border-radius: 50%;
     transition: 0.3s;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-.toggle-switch input:checked + .toggle-slider {
-    background-color: rgba(74, 85, 104, 0.85); 
+input[type="checkbox"]:checked + .toggle-slider-filter {
+    background-color: rgba(74, 85, 104, 0.85);
 }
 
-.toggle-switch input:checked + .toggle-slider:before {
+input[type="checkbox"]:checked + .toggle-slider-filter:before {
     transform: translateX(20px);
 }
 
-.toggle-switch:hover .toggle-slider {
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+/* Dropdown for Category */
+.filter-dropdown {
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: white;
+    color: #555;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.filter-dropdown:hover {
+    border-color: rgba(74, 85, 104, 0.85);
+}
+
+.filter-dropdown:focus {
+    border-color: rgba(74, 85, 104, 0.85);
+}
+
+/* Reset Button */
+.reset-button {
+    width: 100%;
+    padding: 12px;
+    background: rgba(74, 85, 104, 0.85);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.reset-button:hover {
+    background: rgba(74, 85, 104, 1);
 }

@@ -29,11 +29,42 @@
 
     <main class="main-content">
         <div id="map">
-            <div class="map-toggle-container">
-                <label class="toggle-switch">
-                    <input type="checkbox" id="playgroundToggle" checked onclick="togglePlaygroundMarkers()">
-                    <span class="toggle-slider"></span>
-                </label>
+            <div id="filterPanel" class="filter-panel">
+                <!-- Toggle Arrow Button -->
+                <button class="toggle-panel-button" onclick="toggleFilterPanel()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+
+                <div class="filter-content">
+                    <!-- Barrier Filter -->
+                    <div class="filter-section">
+                        <div class="filter-header">
+                            <h4>Barrier</h4>
+                            <label class="filter-toggle-switch">
+                                <input type="checkbox" id="filterBarrierOnly" onchange="applyFilters()">
+                                <span class="toggle-slider-filter"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Category Filter -->
+                    <div class="filter-section">
+                        <div class="filter-header">
+                            <h4>Category</h4>
+                            <select id="filterCategory" class="filter-dropdown" onchange="applyFilters()">
+                                <option value="all">All</option>
+                                <option value="public">Public</option>
+                                <option value="private">Private</option>
+                                <option value="commercial">Commercial</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Reset Button -->
+                    <button class="reset-button" onclick="resetFilters()">Reset Filters</button>
+                </div>
             </div>
         </div>
     </main>
