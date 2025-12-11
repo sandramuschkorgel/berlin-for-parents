@@ -280,6 +280,7 @@ input[type="checkbox"]:checked + .toggle-slider-filter:before {
     cursor: pointer;
     outline: none;
     transition: border-color 0.3s;
+    min-width: 120px;
 }
 
 .filter-dropdown:hover {

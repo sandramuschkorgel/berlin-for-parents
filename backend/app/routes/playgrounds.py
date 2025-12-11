@@ -26,7 +26,17 @@ def transform_barrier(barrier_value):
         return "unknown", None
     else:
         return "yes", barrier_value
+
+def transform_material(material_value):
+    if not material_value:
+        return None
     
+    material = material_value.lower()
+    if material in ['steel', 'aluminium', 'aluminum', 'metal']:
+        return 'metal'
+    else:
+        return material
+
 def extract_useful_tags(tags_hstore):
     if not tags_hstore:
         return {}
@@ -44,7 +54,10 @@ def extract_useful_tags(tags_hstore):
     result = {}
     for key in useful_keys:
         if key in tags_hstore:
-            result[key] = tags_hstore[key]
+            if key == 'material':
+                result[key] = transform_material(tags_hstore[key])
+            else:
+                result[key] = tags_hstore[key]
     
     return result if result else None
 

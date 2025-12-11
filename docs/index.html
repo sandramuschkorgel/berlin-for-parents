@@ -43,7 +43,7 @@
                         <div class="filter-header">
                             <h4>Barrier</h4>
                             <label class="filter-toggle-switch">
-                                <input type="checkbox" id="filterBarrierOnly" onchange="applyFilters()">
+                                <input type="checkbox" id="filterBarrier" onchange="applyFilters()">
                                 <span class="toggle-slider-filter"></span>
                             </label>
                         </div>
@@ -58,6 +58,52 @@
                                 <option value="public">Public</option>
                                 <option value="private">Private</option>
                                 <option value="commercial">Commercial</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Wheelchair Access Filter -->
+                    <div class="filter-section">
+                        <div class="filter-header">
+                            <h4>Wheelchair Access</h4>
+                            <label class="filter-toggle-switch">
+                                <input type="checkbox" id="filterWheelchair" onchange="applyFilters()">
+                                <span class="toggle-slider-filter"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Indoor Filter -->
+                    <div class="filter-section">
+                        <div class="filter-header">
+                            <h4>Indoor</h4>
+                            <label class="filter-toggle-switch">
+                                <input type="checkbox" id="filterIndoor" onchange="applyFilters()">
+                                <span class="toggle-slider-filter"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Dog Filter -->
+                    <div class="filter-section">
+                        <div class="filter-header">
+                            <h4>Dogs</h4>
+                            <select id="filterDog" class="filter-dropdown" onchange="applyFilters()">
+                                <option value="all">All</option>
+                                <option value="no">Not Allowed</option>
+                                <option value="leashed">On Leash</option>
+                            </select>
+                        </div>
+                    </div>
+
+                     <!-- Material Filter -->
+                    <div class="filter-section">
+                        <div class="filter-header">
+                            <h4>Material</h4>
+                            <select id="filterMaterial" class="filter-dropdown" onchange="applyFilters()">
+                                <option value="all">All</option>
+                                <option value="metal">Metal</option>
+                                <option value="wood">Wood</option>
                             </select>
                         </div>
                     </div>

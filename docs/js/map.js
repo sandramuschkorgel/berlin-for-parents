@@ -33,7 +33,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Render playgrounds on map
 function renderPlaygrounds(playgrounds) {
-    // Clear existing markers
     playgroundMarkersLayer.clearLayers();
 
     playgrounds.forEach(pg => {
@@ -52,9 +51,17 @@ function renderPlaygrounds(playgrounds) {
         let popupContent = `<strong>${pg.name || 'Unnamed Playground'}</strong><br>`;
         popupContent += `Category: ${pg.category}<br>`;
         if (pg.barrier_type) {
-            popupContent += `Barrier: ${pg.barrier_type}`;
-        } else {
-            popupContent += `Barrier: Unknown`;
+            popupContent += `Barrier: ${pg.barrier_type}<br>`;
+        }
+
+        if (pg.tags && Object.keys(pg.tags).length > 0) {
+            for (const [key, value] of Object.entries(pg.tags)) {
+                const displayKey = key
+                    .replace(/_/g, ' ')
+                    .replace(/\b\w/g, char => char.toUpperCase());
+                
+                popupContent += `${displayKey}: ${value}<br>`;
+            }
         }
 
         marker.bindPopup(popupContent);
@@ -71,35 +78,39 @@ window.toggleFilterPanel = function() {
 
 // Apply filters
 window.applyFilters = function() {
-    // Get filter states
-    const barrierOnly = document.getElementById('filterBarrierOnly').checked;
-    const selectedCategory = document.getElementById('filterCategory').value;
+    const filters = {
+        barrier: document.getElementById('filterBarrier').checked,
+        category: document.getElementById('filterCategory').value,
+        wheelchair: document.getElementById('filterWheelchair').checked,
+        indoor: document.getElementById('filterIndoor').checked,
+        dog: document.getElementById('filterDog').value,
+        material: document.getElementById('filterMaterial').value
+    };
 
-    // Filter playgrounds
     const filtered = allPlaygrounds.filter(pg => {
-        // Check barrier filter
-        const barrierMatch = barrierOnly ? pg.barrier === 'yes' : true;
-        
-        // Check category filter
-        const categoryMatch = selectedCategory === 'all' || pg.category === selectedCategory;
+        if (filters.barrier && pg.barrier !== 'yes') return false;
+        if (filters.category !== 'all' && pg.category !== filters.category) return false;
+        if (filters.wheelchair && (!pg.tags || !['yes', 'limited'].includes(pg.tags.wheelchair))) return false;
+        if (filters.indoor && (!pg.tags || pg.tags.indoor !== 'yes')) return false;
+        if (filters.dog !== 'all' && (!pg.tags || pg.tags.dog !== filters.dog)) return false;
+        if (filters.material !== 'all' && (!pg.tags || pg.tags.material !== filters.material)) return false;
 
-        return barrierMatch && categoryMatch;
+        return true;
     });
 
     console.log(`Filtered: ${filtered.length} of ${allPlaygrounds.length} playgrounds`);
-    
-    // Re-render with filtered data
+
     renderPlaygrounds(filtered);
 };
 
 // Reset filters
 window.resetFilters = function() {
-    // Uncheck barrier filter
-    document.getElementById('filterBarrierOnly').checked = false;
-    
-    // Reset category to "All"
+    document.getElementById('filterBarrier').checked = false;
+    document.getElementById('filterWheelchair').checked = false;
+    document.getElementById('filterIndoor').checked = false;
     document.getElementById('filterCategory').value = 'all';
+    document.getElementById('filterDog').value = 'all';
+    document.getElementById('filterMaterial').value = 'all';
 
-    // Reapply filters (shows all)
     applyFilters();
 };
